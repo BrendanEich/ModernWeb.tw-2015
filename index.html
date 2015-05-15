@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>JavaScript at 20</title>
+    <link rel="stylesheet" type="text/css" href="build/build.css">
+  </head>
+  <body>
+    <article>
+      <section>
+        <h1>JavaScript at 20</h1>
+        <h2><a href="https://twitter.com/BrendanEich">Brendan Eich</a></h2>
+      </section>
+      <section data-bespoke-backdrop="backdrop backdrop--html5_supes" class="html5_supes undefined">
+        <h2>Standardization</h2>
+        <h3>"Things that are impossible just take longer." <small>- Hixie</small></h3>
+      </section>
+      <section>
+        <h2>What was it like to hack JS in 10 days?</h2>
+      </section>
+      <section><img src="images/tumble.jpg" height="413" width="456">
+        <h3>Me in 1993, before I created JavaScript in 10 days</h3>
+      </section>
+      <section><img src="images/bruce_campbell_army_of_darkness.jpg" height="430" width="375">
+        <h3>1995, after I was done creating JS in 10 days</h3>
+      </section>
+      <section>
+        <h2>Java was the big Web VM</h2>
+        <h3>JavaScript was "little brother"</h3>
+      </section>
+      <section><img src="images/Java-Duke.jpg"></section>
+      <section>
+        <img style="position: relative; top: 0px; border: solid 1px lightgray;" class="transparent" src=images/applet-loading.png />
+        <img style="position: relative; top: -32px; left: -170px;" class="transparent" src=images/sbbod.gif />
+      </section>
+      <section>
+        <h3>Think back to 1995... what was on TV then?</h3>
+      </section>
+      <section><img src="images/1994-tv-shows.jpg" height="407" width="610"></section>
+      <section>
+        <h3>I had my big break that year...</h3>
+      </section>
+      <section><img src="images/friends_chandler_006.jpg" height="512" width="411"></section>
+      <section>
+        <h3>I'd go to a real library to read Computer Science papers.</h3>
+      </section>
+      <section><img src="images/Margaret-Jacks-hall.jpg" height="512" width="439"></section>
+      <section>
+        <h3>John Doerr claims that even an idiot could have been a successful VC in the 1980s:</h3>
+        <h2>"All you had to do was hang around Margaret Jacks Hall."</h2>
+      </section>
+      <section>
+        <h3>Java's bytecode design influenced my work on JS.</h3>
+      </section>
+      <section><img src="images/Gosling-IR-paper.png" height="512" width="433"></section>
+      <section>
+        <h3>Java is <b>typed</b> (or statically typed) and has mostly-typed bytecode</h3>
+        <h3>JS is <b>untyped</b> (or dynamically typed)</h3>
+      </section>
+      <section><img src="images/Gosling-code-sample.png" height="400" width="742"></section>
+      <section>
+        <h3 class="bullet">So in <b>10 days</b> in May 1995, I wrote</h3>
+        <ul>
+          <li>A lexical scanner and parser for early JS</li>
+          <li>The parser emitted stack-machine bytecode</li>
+          <li>Which ran in a bytecode interpreter</li>
+          <li><code>Function.prototype.toString</code> bytecode decompiler</li>
+          <li>The standard library was poor</li>
+          <li><code>Array</code> was <code>Object</code> with <code>.length</code> property</li>
+          <li><code>Date</code> hand-ported <small>(h/t ksmith@netscape.com)</small> from <code>java.util.Date</code> </li>
+        </ul>
+      </section>
+      <section>
+        <h3><a href="http://web.archive.org/web/19970414102538/http://whitetailbutte.com/">http://whitetailbutte.com/</a> case study</h3>
+        <h3>Early DOM mattered as much as JS</h3>
+      </section>
+      <section>
+        <h2 class="bullet">Much progress since then</h2>
+        <ul>
+          <li><a href="http://asmjs.org/">asm.js</a> was discovered</li>
+          <li>ES6 is <a href="http://kangax.github.io/compat-table/es6/">all but done</a></li>
+          <li>typed arrays from WebGL are in ES6</li>
+          <li>typed objects coming in ES7</li>
+          <li><a href="http://www.typescriptlang.org/">TypeScript</a>, and now <a href="http://flowtype.org/">Flow</a></li>
+        </ul>
+      </section>
+      <section>
+        <pre><code class="language-javascript">class vector {
+  constructor(n) { this.arr = new Int32Array(n); }
+  sum() {
+    let la = this.arr;
+    let S = 0;
+    for (let i = la.length|0; (i=(i-1)|0) >= 0;)
+      S = (S + la[i|0])|0;
+    return S;
+  }
+}
+</code></pre>
+      </section>
+      <section><img src="images/java-vs-js-bytecode.png" height="384" width="512"></section>
+      <section>
+        <h3>JS is <b>untyped</b> (dynamically typed), <i>however:</i></h3>
+        <h3>asm.js is <b>typed</b> "bytecode" with deterministic performance</h3>
+      </section>
+      <section>
+        <h3>JS, a <b>dynamically typed</b> language, is often written with <b>latent static types</b></h3>
+        <h3><i>Especially when "written" by compilers</i></h3>
+      </section>
+      <section>
+        <h2 class="bullet">Compiling to JS is not new</h2>
+        <ul>
+          <li>Remember <a href="http://www.gwtproject.org/">GWT</a>, and <a href="http://www.openlaszlo.org/">OpenLaszlo</a> before it?</li>
+          <li><a href="http://coffeescript.org/">CoffeeScript</a>, now hundreds of compile-to-JS languages</li>
+          <li>(including <a href="http://dartlang.org/">Dart</a>)</li>
+          <li>See the <a href="">Solar System of JS</a></li>
+          <li>For C++ to JS, <a href="http://kripken.github.io/mloc_emscripten_talk/">Emscripten</a> by <a href="https://twitter.com/kripken">Alon Zakai</a></li>
+        </ul>
+      </section>
+      <section>
+        <h2>JS VMs compile to the metal</h2>
+        <h3>(just like Java but without declaring all types)</h3>
+      </section>
+      <section>
+        <h3>And the Java VM supports dynamic languages too:</h3>
+      </section>
+      <section><img src="images/java-7-as-dynlang-vm.jpg" height="480" width="640">
+        <p>from <a href="http://www.slideshare.net/nakov/java-7-new-features-by-mihail-stoynov-and-svetlin-nakov">Mikhail Stoynov and Svetlin Nakov</a></p>
+      </section>
+      <section>
+        <h2>The circle is now complete</h2><img src="images/obi-wan-and-vader.jpg" height="281" width="500">
+      </section>
+      <section><img src="images/young-jackie-chan.jpg" height="453" width="391">
+        <h3>Young Jackie Chan</h3>
+      </section>
+      <section><img src="images/mature-jackie-chan.jpg" height="375" width="300">
+        <h3>Mature action hero</h3>
+      </section>
+      <section>
+        <h2>Ecma TC39 on GitHub</h2>
+      </section>
+      <section>
+        <h3><a href="https://github.com/tc39/ecma262">https://github.com/tc39/ecma262</a></h3><img src="images/tc39-on-github.png" height="458" width="640">
+      </section>
+      <section>
+        <h2>A selective tour of ES6</h2>
+      </section>
+      <section>
+        <h3><code>String.prototype.includes(txt, start)</code></h3>
+        <pre><code class="language-javascript">let title = "JS Futures at ModernWeb.tw!";
+title.includes("JS")        // true
+title.includes("!")         // true
+title.includes("XYZ")       // false
+title.includes("JS", 3)     // false
+<a href="https://github.com/tc39/Array.prototype.includes">https://github.com/tc39/Array.prototype.includes</a>
+</code></pre>
+      </section>
+      <section>
+        <h3><code>String.prototype.startsWith(txt, start)</code></h3>
+        <pre><code class="language-javascript">let title = "JS Futures at ModernWeb.tw!";
+title.startsWith("JS")      // true
+title.startsWith("js")      // false
+title.startsWith("F")       // false
+title.startsWith("F", 3)    // true
+</code></pre>
+      </section>
+      <section>
+        <h3><code>String.prototype.endsWith(txt, end)</code></h3>
+        <pre><code class="language-javascript">let title = "JS Futures at ModernWeb.tw!";
+title.endsWith("!")         // true
+title.endsWith(".tw!")   // true
+title.endsWith("!", 3)      // false
+title.endsWith("Fut", 6)    // true
+</code></pre>
+      </section>
+      <section>
+        <h3><code>String.prototype.repeat(count)</code></h3>
+        <pre><code class="language-javascript">console.log("x".repeat(3))      // "xxx"
+console.log("hello".repeat(2))  // "hellohello"
+console.log("abc".repeat(4))    // "abcabcabcabc"
+</code></pre>
+      </section>
+      <section>
+        <h3><code>String.prototype.trim()</code></h3>
+        <pre><code class="language-javascript">console.log(" x  ".trim())      // "x"
+console.log(" \tx".trim())      // "x"
+console.log("foo bar\n".trim()) // "foo bar"
+</code></pre>
+      </section>
+      <section>
+        <h3><code>Template Strings</code></h3>
+        <ul>
+          <li>
+            <pre><code class="language-javascript">// Verbatim literal string, no backslash escapes
+console.log(`In ES6, '\n' is a line feed`);</code></pre>
+          </li>
+          <li>
+            <pre><code class="language-javascript">// Template strings can be multiline
+console.log(`In ES6, you can have multiline
+ strings`);
+ </code></pre>
+          </li>
+        </ul>
+      </section>
+      <section>
+        <h3><code>Template String Interpolation</code></h3>
+        <pre><code class="language-javascript">// Interpolate expressions into a template string
+var name = "Bob",
+    time = "today";
+    
+console.log(`Hello ${name}, how are you ${time}?`);
+</code></pre>
+      </section>
+      <section>
+        <h3><code>Tagged Template Strings</code></h3>
+        <pre><code class="language-javascript">function dedent(strings, ...values) {
+  let result = '';
+  for (let i = 0; i < strings.length; i++) {
+    result += strings[i].replace(/\n\s+/g, '\n') + values[i];
+  }
+  return result;
+}
+
+console.log(dedent `Hello ${name},
+                    How are you ${time}?`);
+                    </code></pre>
+      </section>
+      <section>
+        <h3>Octal and Binary Literals</h3>
+        <pre><code class="language-javascript">var mode = 0o755;   // Unix permission bits
+
+var bits = 0b101;   // better known as 5
+</code></pre>
+      </section>
+      <section>
+        <h3><code>Number.isFinite</code>, <code>Number.isNaN</code></h3>
+        <pre><code class="language-javascript">console.log(isFinite("25"));        // true
+console.log(Number.isFinite("25")); // false
+
+console.log(isNaN("LOL"));          // true!?
+console.log(Number.isNaN("LOL"));   // false
+</code></pre>
+      </section>
+      <section>
+        <h2>New Math functions</h2>
+        <h3>(h/t <a href="https://twitter.com/jaydson">Jaydson Gomes</a>)</h3>
+      </section>
+      <section><img src="images/ES6_Math_fun.jpg" height="450" width="720"></section>
+      <section>
+        <h3><code>Array.from(arraylike, mapfun)</code></h3>
+        <pre><code class="language-javascript">let list = document.querySelectorAll('.speaker h2');
+
+console.log(Array.from(list, elem => elem.innerHTML));
+</code></pre>
+      </section>
+      <section>
+        <h3>Destructuring (Array Pattern)</h3>
+        <pre><code class="language-javascript">var m = 3, d = 15, y = 2015;
+
+var [m, d, y] = [3, 15, 2015];
+
+[m, d, y] = getDateTriple();
+</code></pre>
+      </section>
+      <section>
+        <h3>Destructuring (Object Pattern)</h3>
+        <pre><code class="language-javascript">var today = {m: 3, d: 15, y: 2015};
+
+var {m: month, d: day} = today;
+
+console.log(month, day);    // 3 15
+</code></pre>
+      </section>
+      <section>
+        <h3>Object Literal Shorthand</h3>
+        <pre><code class="language-javascript">function longhand(bar, baz) {
+  return {foo: true, bar: bar, baz: baz};
+}
+
+function shorthand(bar, baz) {
+  return {foo: true, bar, baz};
+}
+</code></pre>
+      </section>
+      <section>
+        <h3>Block Scope</h3>
+        <pre><code class="language-javascript">for (var i = 0; i < 3; i++) {
+  let j = i * i;
+  console.log(j);   // Works
+}
+console.log(j);     // Fails
+
+// also const, class, function in block
+</code></pre>
+      </section>
+      <section>
+        <h3 class="bullet">Arrow Function Syntax</h3>
+        <ul>
+          <li>Like CoffeeScript's "fat arrow"</li>
+          <li>Outer <code>this</code> binding</li>
+          <li>Not <code>new</code>-able</li>
+          <li>No <code>arguments</code> object</li>
+          <li>Always anonymous</li>
+        </ul>
+      </section>
+      <section>
+        <h3 class="bullet">Arrow Function: Expression Body</h3>
+        <pre><code class="language-javascript">// Single parameter shorthand
+let square = x => x * x;
+console.log(square(4));     // 16
+
+// 0 or n > 1 parameters case
+let empty = () => undefined;
+let add = (a, b) => a + b;
+</code></pre>
+      </section>
+      <section>
+        <h3 class="bullet">Arrow Function: Block Body</h3>
+        <pre><code class="language-javascript">let Ackermann = (m, n) => {
+  if (m == 0) return n + 1;
+  if (n == 0) return Ackermann(m - 1, 1);
+  return Ackermann(m - 1, Ackermann(m, n - 1));
+}
+
+console.log(Ackermann(2,2));    // 7
+console.log(Ackermann(3,3));    // 61
+console.log(Ackermann(3,4));    // 125
+</code></pre>
+      </section>
+      <section>
+        <h3>Arrows: Great for Callbacks</h3>
+        <pre><code class="language-javascript">// The classic mistake...
+Car.prototype.start = function () {
+  setTimeout(function () {
+    this.startDriving();    // Wrong this!
+  }, 1000);
+};
+
+// Much better than using ES5 .bind!
+Car.prototype.start = function () {
+  setTimeout(() => this.startDriving(), 1000);
+};
+</code></pre>
+      </section>
+      <section>
+        <h3>Classes</h3>
+        <pre><code class="language-javascript">class Animal {
+  constructor(name) {
+    this.name = name;
+  }
+  
+  breathe() {
+    console.log(`${this.name} is breathing`);
+  }
+}
+</code></pre>
+      </section>
+      <section>
+        <h3>Instead of The Prototypal Pattern</h3>
+        <pre><code class="language-javascript">function Animal(name) {
+  this.name = name;
+}
+
+Animal.prototype.breathe = function() {
+  console.log(`${this.name} is breathing`);
+}
+</code></pre>
+      </section>
+      <section>
+        <h3>Subclassing</h3>
+        <pre><code class="language-javascript">class Dog extends Animal {
+  constructor(name) {
+    super(name);
+  }
+  
+  bark() {
+    console.log(`Woof! ${this.name} is barking`);
+  }
+}
+</code></pre>
+      </section>
+      <section>
+        <h3>Subclassing Further</h3>
+        <pre><code class="language-javascript">class Bulldog extends Dog {
+  constructor(name) {
+    super(name);
+  }
+  
+  breathe() {
+    super.breathe();
+    console.log(`${this.name} just drooled, too!`);
+  }
+}
+</code></pre>
+      </section>
+      <section>
+        <h2>Modules</h2>
+      </section>
+      <section>
+        <h3>Simple Modules</h3>
+        <pre><code class="language-javascript">// baz.js
+let baz = 'baz;
+
+export baz;
+// could combine: export let baz = 'baz';
+
+// app.js
+import {baz} from "baz.js";
+</code></pre>
+      </section>
+      <section>
+        <h3>Default Exports</h3>
+        <pre><code class="language-javascript">// print.js
+export default function print(what) {
+  return `print module called with ${what}`;
+}
+
+// app.js
+import print from "print.js";
+
+</code></pre>
+      </section>
+      <section>
+        <h3>Mixing and Matching</h3>
+        <pre><code class="language-javascript">// foo.js
+import {baz} from "./baz.js";
+console.log(`from module baz: ${baz}`);
+
+let foo = 'foo';
+
+export default foo;
+export let bar = 'bar';
+
+// app.js
+import {bar} from "foo.js";
+</code></pre>
+      </section>
+      <section>
+        <h2>More ES6 Additions...</h2>
+        <ul>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters">default parameters</a></li>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters">rest parameters</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator">spread operator</a></li>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of"><code>for</code>-<code>of</code> loop</a></li>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols">iterators</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator">generators</a></li>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map"><code>Map</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set"><code>Set</code></a></li>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap"><code>WeakMap</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet"><code>WeakSet</code></a></li>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy"><code>Proxy</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect"><code>Reflect</code></a></li>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise"><code>Promise</code></a></li>
+        </ul>
+      </section>
+      <section>
+        <h2>ES6/2015, ES7/2016, ES8...</h2>
+      </section>
+      <section>
+        <h2>ES7 async functions</h2>
+      </section>
+      <section>
+        <pre><code class="language-javascript">function chainAnimationsPromise(elem, animations) {
+  let ret = null;
+  let p = currentPromise;
+  for (let anim of animations) {
+    p = p.then(function(val) {
+      ret = val;
+      return anim(elem);
+    });
+  }
+  return p.catch(e => { /* ignore and keep going */ })
+          .then(() => { return ret; });
+}
+</code></pre>
+      </section>
+      <section>
+        <pre><code class="language-javascript">function chainAnimationsGenerator(elem, animations) {
+  return spawn(function*() {
+    let ret = null;
+    try {
+      for (let anim of animations) {
+        ret = yield anim(elem);
+      }
+    } catch(e) { /* ignore and keep going */ }
+    return ret;
+  });
+}
+</code></pre>
+      </section>
+      <section>
+        <pre><code class="language-javascript">async function chainAnimationsAsync(elem, animations) {
+  let ret = null;
+  try {
+    for (let anim of animations) {
+      ret = await anim(elem);
+    }
+  } catch(e) { /* ignore and keep going */ }
+  return ret;
+}
+</code></pre>
+      </section>
+      <section>
+        <h2 class="bullet">More on board for ES7</h2>
+        <ul>
+          <li><a href="https://github.com/johnmccutchan/ecmascript_simd/">SIMD</a></li>
+          <li><a href="https://github.com/nikomatsakis/typed-objects-explainer/">typed objects </a></li>
+          <li><a href="">value objects</a>, including</li>
+          <li><code>int64</code> and <code>uint64</code></li>
+          <li>user-defined operators and literals</li>
+          <li>async generators</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Demos</h2>
+      </section>
+      <section><img src="images/alwaysbetonjs.png" height="384" width="512"></section>
+    </article>
+    <script src="build/build.js"></script>
+  </body>
+</html>
